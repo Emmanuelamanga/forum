@@ -54,8 +54,8 @@ return [
     |
     */
 
-    'headline'      => 'Welcome to Chatter',
-    'description'   => 'A simple forum package for your Laravel app.',
+    'headline'      => 'Welcome to Computer Science Forum',
+    'description'   => 'Meet, Share, Grow, Develope',
     'headline_logo' => '/vendor/devdojo/chatter/assets/images/logo-light.png',
 
     /*
@@ -175,7 +175,7 @@ return [
 
     'security' => [
         'limit_time_between_posts' => true, //
-        'time_between_posts'       => 1, // In minutes
+        'time_between_posts'       => 0.5, // In minutes
     ],
 
     /*
