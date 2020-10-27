@@ -25,6 +25,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define(\WebDevEtc\BlogEtc\Gates\GateTypes::MANAGE_BLOG_ADMIN, static function($user){
+            // Implement your logic here, for example:
+                return true;
+            // Or something like `$user->is_admin === true`
+        });
     }
 }
