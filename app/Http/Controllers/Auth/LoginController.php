@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,34 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * login function
+     */
+    public function login(HttpRequest $request)
+    {
+        $input = $request->all();
+
+        $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+
+        if (strstr($request->username, '/')) {
+            if (Auth::attempt(['regnumber' => $request->username, 'password' => $request->password])) {
+                return redirect()->route('home');
+            } else {
+                return redirect()->back()
+                    ->with('danger', 'Registration Number/username And Password Are Wrong.');
+            }
+        } else {
+            if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+                return redirect()->route('home');
+            } else {
+                return redirect()->back()
+                    ->with('danger', 'Registration Number/username And Password Are Wrong.');
+            }
+        }
     }
 }
