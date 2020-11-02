@@ -6,44 +6,63 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-sm-6 h5  text-uppercase">{{ __('Home Group :') }}</div>
-                        <div class="fom-group col-sm-6">
-                            <select name="homecounty" id="homecounty" class="form-control">
-                                <option value="" selected disabled>Select Home County</option>
-                            </select>
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                Please check the form below for errors
+            </div>
+            @endif
+            <form action="{{route('group.store')}}" id="usersForm" method="post">
+                @csrf
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-sm-6 h5  text-uppercase">{{ __('Home Group :') }}</div>
+                            <div class="fom-group col-sm-6">
+                                <select name="homecounty" id="homecounty" class="form-control" required>
+                                    <option value="" selected disabled>Select Home County</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="card-body">
-                    <div class="usersTable-container">
-                        <table class="table table-bordered table-striped" id="usersTable">
-                            <thead>
-                                <th>Name</th>
-                                <th>Registration Number</th>
-                                <th>Date Joined</th>
-                            </thead>
-                            <tbody id="userData">
-                            </tbody>
-                            <tfoot>
-                                <th>Name</th>
-                                <th>Registration Number</th>
-                                <th>Date Joined</th>
-                            </tfoot>
-                        </table>
+                    <div class="card-body">
+                        <div class="usersTable-container">
+                            <div class="form-group">
+                                <label>Group Name:</label>
+                                <div class="">
+                                    <input type="text" name="groupName" id="groupName" class="form-control" required>
+                                </div>
+                            </div>
+                            <table class="table table-bordered table-striped" id="usersTable">
+                                <thead>
+                                    <th>Select</th>
+                                    <th>Name</th>
+                                    <th>Registration Number</th>
+                                    <th>Date Joined</th>
+                                </thead>
+                                <tbody id="userData">
+                                </tbody>
+                                <tfoot>
+                                    <th>Select</th>
+                                    <th>Name</th>
+                                    <th>Registration Number</th>
+                                    <th>Date Joined</th>
+                                </tfoot>
+                            </table>
+                            <button type="submit" class="btn btn-success btn-sm">+ Create Group</button>
+                        </div>
+
                     </div>
-
                 </div>
-            </div>
+            </form>
+
         </div>
     </div>
 </div>
 @endsection
 @section('js')
-<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" ></script>
+<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <script>
     $(document).ready(function(){
         // initialize datatables
@@ -78,22 +97,27 @@
                 dataType:'json',
                 success: function(data){
                     // console.log(data)
-                    if (data.length == 0) {
-                    alert('No user data for selected county')
+                if (data.length == 0) {
+                alert('No user data for selected county')
                 }else{
-                    // show the table
-
-                     $('.usersTable-container').show(1000);
+                // show the table
+                    $('.usersTable-container').show(1000);
+                    // clear initial user data
+                    $('#userData').html('');
                 // append the user rows
                 $.each(data, function(key, value){
-                    $('#userData').html(
-                        '<tr><td>'+value.username+'</td><td>'+value.regnumber+'</td><td>'+(new Date(value.created_at)).toDateString()+'</td></tr>'
+                    $('#userData').append(
+                        '<tr><td><input type="checkbox" value='+value.id+' name="groupUser[]"/></td><td>'+value.username+'</td><td>'+value.regnumber+'</td><td>'+(new Date(value.created_at)).toDateString()+'</td></tr>'
                     );
                 })
                 }
 
                 }
             })
+        })
+        $('#usersForm').on('submit', function(e){
+            // e.preventDefault();
+            console.log($(this).serializeArray())
         })
     })
 </script>

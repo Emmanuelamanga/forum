@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
       $users =  User::where('hometown', $county)->get();
         return json_encode($users);
     });
-
+// group routes
+Route::resource('group', App\Http\Controllers\GroupController::class);
+Route::resource('groupUsers', App\Http\Controllers\GroupUsersController::class);
 });
 
