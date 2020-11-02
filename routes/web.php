@@ -24,11 +24,11 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/counties', function () {
+    $jsonString = file_get_contents(base_path('resources/lang/en/counties.json'));
+    return json_decode($jsonString, true);
+});
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/counties', function () {
-        $jsonString = file_get_contents(base_path('resources/lang/en/counties.json'));
-        return json_decode($jsonString, true);
-    });
 // get homegroup page
     Route::get('/homegroup', function () {
         return view('homegroup');
