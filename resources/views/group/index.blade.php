@@ -26,7 +26,7 @@
                                 <td>{{\Illuminate\Support\Facades\DB::table('users')->where('id', $group->adminId)->value('fname')}}
                                 </td>
                                 @if ($group->adminId == Auth::user()->id)
-                                <td><a href="{{route('deleteGroup',[$group->id])}}">Trash</a></td>
+                                <td><a onclick="return confirm('Are you sure ?')" href="{{route('deleteGroup',[$group->id])}}">Trash</a></td>
                                 @endif
                             </tr>
                             @endforeach
