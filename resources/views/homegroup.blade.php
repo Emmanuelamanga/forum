@@ -17,7 +17,8 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="text-uppercase"><a href="/group">{{ __('Groups') }}</a></div>
+                            <div class="text-uppercase col-sm-6">
+                                <a href="/group" class="btn btn-outline-info btn-sm">{{ __('Groups') }}</a></div>
                             <div class="fom-group col-sm-6">
                                 <label for="homecounty">Select Home county</label>
                                 <select name="homecounty" id="homecounty" class="form-control" required>
@@ -35,6 +36,7 @@
                                     <input type="text" name="groupName" id="groupName" class="form-control" required>
                                 </div>
                             </div>
+                            <input type="hidden" name="adminId" value="{{Auth::user()->id}}">
                             <table class="table table-bordered table-striped" id="usersTable">
                                 <thead>
                                     <th>Select</th>
@@ -76,8 +78,6 @@
             type:'get',
             dataType:'json',
             success: function(data){
-
-
                 $.each(data, function(key, value){
                   $('#homecounty').append('<option value='+value.name+'>'+value.name+'</option>')
                 });

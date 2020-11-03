@@ -17,6 +17,7 @@ class CreateGroupsTable extends Migration
             $table->id();
             $table->string('homecounty');
             $table->string('groupname');
+            $table->string('adminId');
             $table->timestamps();
         });
     }

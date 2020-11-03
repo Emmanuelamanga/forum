@@ -43,12 +43,14 @@ class GroupController extends Controller
         $request->validate([
             'homecounty' => 'required',
             'groupName' => 'required',
-            'groupUser' => 'required'
+            'groupUser' => 'required',
+            'adminId'=>'required'
         ]);
         // create group
         $id =  Group::create([
             'groupName' => $request->groupName,
             'homecounty' => $request->homecounty,
+            'adminId'=>$request->adminId
         ]);
         // create groupusers
         foreach ($request->groupUser as $key => $groupUser) {
@@ -109,8 +111,11 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Group $group)
+    public function destroy($group)
     {
-        //
+        $group = Group::find($group);
+        $group->delete();
+
+        return redirect()->back();
     }
 }

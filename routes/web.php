@@ -42,6 +42,6 @@ Route::group(['middleware' => 'auth'], function () {
 Route::resource('group', App\Http\Controllers\GroupController::class);
 Route::resource('groupUsers', App\Http\Controllers\GroupUsersController::class);
 Route::resource('groupConversation', App\Http\Controllers\GroupConversationController::class);
-
+Route::get('groupdelete/{id}', [App\Http\Controllers\GroupController::class, 'destroy'])->name('deleteGroup');
 });
 
