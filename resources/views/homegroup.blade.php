@@ -17,8 +17,9 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="row">
-                            <div class="col-sm-6 h5  text-uppercase">{{ __('Home Group :') }}</div>
+                            <div class="text-uppercase"><a href="/group">{{ __('Groups') }}</a></div>
                             <div class="fom-group col-sm-6">
+                                <label for="homecounty">Select Home county</label>
                                 <select name="homecounty" id="homecounty" class="form-control" required>
                                     <option value="" selected disabled>Select Home County</option>
                                 </select>

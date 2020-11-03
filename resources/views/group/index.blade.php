@@ -17,7 +17,7 @@
                            @if (count($groups)>0)
                                 @foreach ($groups as $group)
                                     <tr>
-                                        <td>{{$group->groupname}}</td>
+                                        <td><a href="/group/{{$group->id}}">{{$group->groupname}}</a> </td>
                                         <td>{{$group->homecounty}}</td>
                                     </tr>
                                 @endforeach

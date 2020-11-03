@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\GroupConversation;
 use App\Models\GroupUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,14 +46,14 @@ class GroupController extends Controller
             'groupUser' => 'required'
         ]);
         // create group
-         $id =  Group::create([
-                'groupName'=> $request->groupName,
-                'homecounty' => $request->homecounty,
-            ]);
+        $id =  Group::create([
+            'groupName' => $request->groupName,
+            'homecounty' => $request->homecounty,
+        ]);
         // create groupusers
         foreach ($request->groupUser as $key => $groupUser) {
             GroupUsers::create([
-                'group_id'=>$id,
+                'group_id' => $id,
                 'user_id' => $groupUser
             ]);
         }
@@ -68,7 +69,15 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        //
+        $conversations =  GroupConversation::where('group_id', $group->id)->get();
+
+        return view(
+            'group.groupConversation',
+            [
+                'group' => $group,
+                'groupConversations' => $conversations
+            ]
+        );
     }
 
     /**
