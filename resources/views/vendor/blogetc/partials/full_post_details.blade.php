@@ -1,11 +1,14 @@
 @php
     /** @var \WebDevEtc\BlogEtc\Models\Post $post */
 @endphp
-@can(\WebDevEtc\BlogEtc\Gates\GateTypes::MANAGE_BLOG_ADMIN)
-    <a href="{{$post->editUrl()}}" class="btn btn-outline-secondary btn-sm pull-right float-right">
+{{-- @can(\WebDevEtc\BlogEtc\Gates\GateTypes::MANAGE_BLOG_ADMIN) --}}
+@if (\Auth::user()->id == $post->user_id)
+<a href="{{$post->editUrl()}}" class="btn btn-outline-secondary btn-sm pull-right float-right">
         Edit Post
     </a>
-@endcan
+@endif
+
+{{-- @endcan --}}
 
 <h2 class="blog_title">{{$post->title}}</h2>
 <h5 class="blog_subtitle">{{$post->subtitle}}</h5>
