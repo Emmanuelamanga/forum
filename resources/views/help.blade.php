@@ -9,6 +9,7 @@
                 <div class="card-body">
                     <form action="{{route('save.help')}}" method="post">
                         @csrf
+                        <input type="hidden" name="user_id" value={{Auth::user()->id}}>
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" name="email" value="{{old('email', Auth::user()->email)}}"  required>
