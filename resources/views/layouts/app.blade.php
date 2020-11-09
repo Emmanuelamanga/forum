@@ -45,6 +45,9 @@
                             <a href="/blog" class="nav-link">Blogs</a>
                         </li>
                         <li class="nav-item">
+                            <a href="/blog_admin/add_post" class="nav-link">Create Blog</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="/homegroup" class="nav-link">Home Group</a>
                         </li>
                         <li class="nav-item">

@@ -42,7 +42,7 @@ return [
     'memory_limit' => '2048M',
 
     // User model - update if you have a different user class.
-    'user_model' => \App\Models\User::class,
+    'user_model' => App\Models\User::class,
 
     // Show full post on the index pages
     'show_full_post_on_index' => false,
