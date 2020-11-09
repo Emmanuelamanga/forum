@@ -4,6 +4,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\Group;
+use Illuminate\Http\Request;
+use App\Models\help;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,5 +45,29 @@ Route::resource('group', App\Http\Controllers\GroupController::class);
 Route::resource('groupUsers', App\Http\Controllers\GroupUsersController::class);
 Route::resource('groupConversation', App\Http\Controllers\GroupConversationController::class);
 Route::get('groupdelete/{id}', [App\Http\Controllers\GroupController::class, 'destroy'])->name('deleteGroup');
+Route::get('/help', function () {
+    return view('help');
+});
+
+Route::post('/help', function (Request $request) {
+    $request->validate([
+        'email' => 'required|email',
+        'message'=> 'required|string'
+    ]);
+    help::create($request->all());
+    return redirect()->route('/forums');
+})->name('save.help');
+Route::get('/complains', function () {
+    return view('complains');
+});
+    Route::post('/complains', function (Request $request) {
+        $help = help::find($request->respid);
+        $help->update([
+            'status'=> 1,
+            'response'=>$request->response,
+        ]);
+        return redirect()->back();
+    })->name('save.response');
+
 });
 

@@ -47,6 +47,15 @@
                         <li class="nav-item">
                             <a href="/homegroup" class="nav-link">Home Group</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/help" class="nav-link">Help</a>
+                        </li>
+                        @if (Auth::user()->is_admin)
+                        <li class="nav-item">
+                            <a href="/complains" class="nav-link">Respond Help</a>
+                        </li>
+                        @endif
+
                         @endauth
                     </ul>
 
