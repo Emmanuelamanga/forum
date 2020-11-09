@@ -2,7 +2,7 @@
 @section("content")
     <div class="row">
         <div class="col-sm-12 blogetc_container">
-            @can(\WebDevEtc\BlogEtc\Gates\GateTypes::MANAGE_BLOG_ADMIN)
+            {{-- @can(\WebDevEtc\BlogEtc\Gates\GateTypes::MANAGE_BLOG_ADMIN)
                 <div class="text-center">
                     <p class="mb-1">
                         You are logged in as a blog admin user.
@@ -14,7 +14,7 @@
                         </a>
                     </p>
                 </div>
-            @endcan
+            @endcan --}}
 
             @if(isset($blogetc_category) && $blogetc_category)
                 <h2 class="text-center">
