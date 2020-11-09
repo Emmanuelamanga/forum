@@ -55,7 +55,7 @@ Route::post('/help', function (Request $request) {
         'message'=> 'required|string'
     ]);
     help::create($request->all());
-    return redirect()->route('/forums');
+    return redirect()->route('home');
 })->name('save.help');
 Route::get('/complains', function () {
     return view('complains');
@@ -68,6 +68,10 @@ Route::get('/complains', function () {
         ]);
         return redirect()->back();
     })->name('save.response');
+    Route::get('/response', function (Request $request) {
+            $help_responses = help::where('user_id', Auth::user()->id)->where('status', 1)->get();
+            return view('response')->with('responses', $help_responses);
+    })->name('myResponse');
 
 });
 

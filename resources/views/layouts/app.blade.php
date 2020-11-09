@@ -50,6 +50,9 @@
                         <li class="nav-item">
                             <a href="/help" class="nav-link">Help</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/response" class="nav-link">My Responses</a>
+                        </li>
                         @if (Auth::user()->is_admin)
                         <li class="nav-item">
                             <a href="/complains" class="nav-link">Respond Help</a>
